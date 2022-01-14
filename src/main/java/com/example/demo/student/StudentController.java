@@ -1,5 +1,6 @@
 package com.example.demo.student;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,8 @@ import java.util.List;
 @RequestMapping(path = "api/v1/student")
 public class StudentController {
 
-    private final StudentService studentService;
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
     public StudentController(StudentService studentService) {
@@ -21,7 +23,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getStudents(StudentService studentService) {
+    public List<Student> getStudents(@NotNull StudentService studentService) {
         return studentService.getStudents();
     }
 }
